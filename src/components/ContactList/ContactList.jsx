@@ -5,15 +5,15 @@ export const ContactList = ({ contacts, onRemoveContact }) => {
   return (
     <ul>
       {contacts.map(({ id, name, number }) => (
-        <li key={id} className='mb-2 flex items-center gap-4'>
-          <div className='flex items-center justify-between w-4/5'>
+        <li key={id} className='mb-2 flex items-center justify-between gap-2'>
+          <div className='flex items-center justify-between w-10/12'>
             <span className='w-1/2 overflow-hidden max-[375px]:text-xs'>{name}:</span>
             <span className='overflow-hidden max-[375px]:text-xs'>{number}</span>
           </div>
           <button
             type='button'
             onClick={() => onRemoveContact(id)}
-            className='flex items-center gap-2 rounded-lg bg-rose-500 px-2 py-[2px] hover:bg-rose-700 hover:stroke-black active:bg-rose-700 max-[375px]:text-xs max-[375px]:gap-1'
+            className='flex rounded-lg bg-rose-500 px-2 py-[2px] hover:bg-rose-700 hover:stroke-black active:bg-rose-700 max-[375px]:text-xs max-[375px]:gap-1'
           >
             <PiUserCircleMinusDuotone />
           </button>
