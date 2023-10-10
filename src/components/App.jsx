@@ -20,6 +20,19 @@ export class App extends Component {
     number: '',
   };
 
+  componentDidMount() {
+    const savedState = localStorage.getItem('state');
+    if (savedState !== null) {
+      this.setState(JSON.parse(savedState));
+    }
+  }
+
+  componentDidUpdate(prevState) {
+    if (prevState !== this.state) {
+      localStorage.setItem('state', JSON.stringify(this.state));
+    }
+  }
+
   addNewContact = newContact => {
     const { contacts } = this.state;
     const nameExists = contacts.some(
