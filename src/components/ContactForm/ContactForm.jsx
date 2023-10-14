@@ -3,23 +3,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import { PiUserCirclePlusLight, PiUserCircleLight, PiPhoneLight } from 'react-icons/pi';
-
-const ContactShema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, 'Too Short!')
-    .matches(
-      /^[a-zA-Zа-яА-Я]+([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*$/,
-      'Name may contain only letters, apostrophe, dash and spaces.'
-    )
-    .required('This is a required field'),
-  number: Yup.string()
-    .matches(
-      /^\+?\d{1,4}?[ .\-s]?(\(\d{1,3}?\))?([ .\-s]?\d{1,4}){1,4}$/,
-      'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
-    )
-    .required('This is a required field')
-    .min(9, 'Please enter at least 9 characters'),
-});
 export class ContactForm extends Component {
   render() {
     return (
@@ -29,7 +12,22 @@ export class ContactForm extends Component {
           this.props.onAddContact(values);
           actions.resetForm();
         }}
-        validationSchema={ContactShema}
+        validationSchema={Yup.object().shape({
+          name: Yup.string()
+            .min(2, 'Too Short!')
+            .matches(
+              /^[a-zA-Zа-яА-Я]+([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*$/,
+              'Name may contain only letters, apostrophe, dash and spaces.'
+            )
+            .required('This is a required field'),
+          number: Yup.string()
+            .matches(
+              /^\+?\d{1,4}?[ .\-s]?(\(\d{1,3}?\))?([ .\-s]?\d{1,4}){1,4}$/,
+              'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
+            )
+            .required('This is a required field')
+            .min(9, 'Please enter at least 9 characters'),
+        })}
       >
         <Form className='mb-2 flex flex-col items-center gap-3 py-3'>
           <label className='flex flex-col items-center gap-2'>
